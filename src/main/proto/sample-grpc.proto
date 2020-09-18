@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_package = "com.grpc.sample";
+option java_outer_classname = "SampleGRPCApp";
+option objc_class_prefix = "HLW";
+
+package samplegrpc;
+
+service SampleGrpcService{
+  rpc getMessage(gRPCRequest) returns (gRPCResponse){}
+}
+
+
+message gRPCRequest{
+  string message =1;
+}
+message gRPCResponse{
+  string message =1;
+}
