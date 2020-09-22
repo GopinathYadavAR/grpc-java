@@ -2,7 +2,6 @@ package com.grpc.sample.client;
 
 import com.grpc.sample.SampleGRPCApp;
 import com.grpc.sample.SampleGrpcServiceGrpc;
-import com.grpc.sample.service.SampleGrpcService;
 import com.grpc.sample.service.impl.SampleGrpcServiceImpl;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -19,23 +18,24 @@ public class GrpcClient {
         this.blockingStub = SampleGrpcServiceGrpc.newBlockingStub(channel);
     }
 
-    public void invokeGrpcSampleService(){
+    public void invokeGrpcSampleService() {
         SampleGRPCApp.gRPCRequest request = SampleGRPCApp
-                                        .gRPCRequest
-                                        .newBuilder()
-                                        .setMessage("Request from GRPC Client")
-                                        .build();
-           SampleGRPCApp.gRPCResponse rpcResponse;
-           rpcResponse = blockingStub.getMessage(request);
-           LOGGER.info(rpcResponse.getMessage());
+                .gRPCRequest
+                .newBuilder()
+                .setMessage("Request from GRPC Client")
+                .build();
+        SampleGRPCApp.gRPCResponse rpcResponse;
+        rpcResponse = blockingStub.getMessage(request);
+        LOGGER.info(rpcResponse.getMessage());
 
     }
-    public static void main(String... args){
-        ManagedChannel channel= ManagedChannelBuilder.forTarget(serverURL)
+
+    public static void main(String... args) {
+        ManagedChannel channel = ManagedChannelBuilder.forTarget(serverURL)
                 .usePlaintext()
                 .build();
         GrpcClient grpcClient = new GrpcClient(channel);
-         grpcClient.invokeGrpcSampleService();
+        grpcClient.invokeGrpcSampleService();
 
 
     }
